@@ -10,22 +10,49 @@ views:
           ## 博威壁挂炉 · 采暖温度上升曲线
           **温度（℃）是热舒适度指标，不属于能源消耗，故单独成板，不放入能源看板。**
           采暖实际用气请在能源看板查看「贵阳燃气」的 `燃气表读数 / 当期用气量`（设备类 gas，已合规）。
+      - type: markdown
+        content: |
+          ## App 状态图标 ↔ 含义 ↔ 数据点 对照表
+          以下图标与「新云合」App 冬季烧地暖时显示的一一对应（实时值见下方状态卡）。
+
+          | App 图标 | 含义 | 数据点 | 当前 |
+          |---|---|---|---|
+          | 🏠 房子 | **地暖**（地面采暖，非散热器） | `aid 116`=1 | ● 亮 |
+          | 🔥 火焰 | 正在点火烧气产热 | `aid 107` bit1 | ● 亮 |
+          | 🌀 风扇 | 燃烧风机运转（送风/排烟） | `aid 107` bit2 | ● 亮 |
+          | 💧 水泵 | 循环水泵把热水打进地暖管 | `aid 107` bit3 | ● 亮 |
+          | 🌡️ 温度计 | 房间温控器在请求加热 | `aid 107` bit4 | ● 亮 |
+          | 💦 水滴 | 供暖回路有水在流动（水流信号） | `aid 107` bit0 | ○ 灰 |
+          | ❄️ 雪花 | 夏季模式（当前冬季故不亮） | `aid 102`=0 | ○ 灰 |
+          | ⏰ 时钟 | 定时功能 | `aid 108`=0 | ○ 灰 |
+          | 🔁 零冷水 | 零冷水模式 | `aid 29`=0 | ○ 灰 |
+          | ⚠️ 叹号 | 故障报警 | `aid 17`=无 | ○ 灰 |
+
+          > 注：房子图标来自 `aid 116`（地暖指示），火焰/风扇/水泵/温度计来自 `aid 107` 状态位图。
+          > 二进制状态实体（风扇/水泵/温度计/水流）需重启 HA 集成后才会显示，重载前为「不可用」属正常。
       - type: glance
-        title: 锅炉实时运行状态（冬季烧地暖点火时全部亮起）
+        title: 锅炉实时运行状态（对应 App 图标，冬季烧地暖时点亮）
         show_state: true
-        columns: 5
+        columns: 6
         entities:
+          - entity: sensor.bo_wei_bi_gua_lu_san_re_fang_shi
+            name: 🏠 地暖(房子)
+            icon: mdi:home
           - entity: sensor.bo_wei_bi_gua_lu_ran_shao_zhuang_tai
-            name: 火焰/燃烧
+            name: 🔥 火焰/燃烧
             icon: mdi:fire
-          - entity: binary_sensor.bo_wei_bi_gua_lu_shui_liu_xin_hao
-            name: 水流
           - entity: binary_sensor.bo_wei_bi_gua_lu_feng_ji_zhuang_tai
-            name: 风机
+            name: 🌀 风机
+            icon: mdi:fan
           - entity: binary_sensor.bo_wei_bi_gua_lu_shui_beng
-            name: 水泵
+            name: 💧 水泵
+            icon: mdi:pump
           - entity: binary_sensor.bo_wei_bi_gua_lu_wen_kong_qi
-            name: 温控器
+            name: 🌡️ 温控器
+            icon: mdi:thermostat
+          - entity: binary_sensor.bo_wei_bi_gua_lu_shui_liu_xin_hao
+            name: 💦 水流
+            icon: mdi:waves
       - type: history-graph
         title: 实时升温曲线（最近 24 小时，叠加燃烧动作）
         hours_to_show: 24
