@@ -10,6 +10,22 @@ views:
           ## 博威壁挂炉 · 采暖温度上升曲线
           **温度（℃）是热舒适度指标，不属于能源消耗，故单独成板，不放入能源看板。**
           采暖实际用气请在能源看板查看「贵阳燃气」的 `燃气表读数 / 当期用气量`（设备类 gas，已合规）。
+      - type: glance
+        title: 锅炉实时运行状态（冬季烧地暖点火时全部亮起）
+        show_state: true
+        columns: 5
+        entities:
+          - entity: sensor.bo_wei_bi_gua_lu_ran_shao_zhuang_tai
+            name: 火焰/燃烧
+            icon: mdi:fire
+          - entity: binary_sensor.bo_wei_bi_gua_lu_shui_liu_xin_hao
+            name: 水流
+          - entity: binary_sensor.bo_wei_bi_gua_lu_feng_ji_zhuang_tai
+            name: 风机
+          - entity: binary_sensor.bo_wei_bi_gua_lu_shui_beng
+            name: 水泵
+          - entity: binary_sensor.bo_wei_bi_gua_lu_wen_kong_qi
+            name: 温控器
       - type: history-graph
         title: 实时升温曲线（最近 24 小时，叠加燃烧动作）
         hours_to_show: 24

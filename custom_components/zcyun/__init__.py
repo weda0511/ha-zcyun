@@ -55,14 +55,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     }
 
     await hass.config_entries.async_forward_entry_setups(
-        entry, ["climate", "water_heater", "sensor"]
+        entry, ["climate", "water_heater", "sensor", "binary_sensor"]
     )
     return True
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     unload_ok = await hass.config_entries.async_unload_platforms(
-        entry, ["climate", "water_heater", "sensor"]
+        entry, ["climate", "water_heater", "sensor", "binary_sensor"]
     )
     if unload_ok:
         hass.data[DOMAIN].pop(entry.entry_id, None)
