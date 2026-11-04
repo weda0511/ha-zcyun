@@ -1,0 +1,12 @@
+{
+  "platform": "zcyun (智城云/新云合)",
+  "base": "https://papi.zcyun.cn",
+  "account": "YOUR_PHONE",
+  "password": "YOUR_PASSWORD",
+  "platformId": 2,
+  "appId": 5,
+  "openId": "",
+  "openKey": "",
+  "openKeyExpiredAt": 0,
+  "note": "首次运行会自动鉴权并写入 zcyun_config.json。openKey 72h 有效，到期自动续期。sign=SHA1(方法大写+URI路径不含query+body+ts+openKey)"
+}

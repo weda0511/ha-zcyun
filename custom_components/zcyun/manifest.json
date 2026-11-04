@@ -1,0 +1,12 @@
+{
+  "domain": "zcyun",
+  "name": "智城云（新云合）",
+  "codeowners": ["@weda0511"],
+  "config_flow": true,
+  "documentation": "https://github.com/weda0511/ha-zcyun",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/weda0511/ha-zcyun",
+  "requirements": [],
+  "version": "1.1.0"
+}

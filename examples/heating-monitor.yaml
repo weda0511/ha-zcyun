@@ -1,0 +1,55 @@
+title: 采暖监控
+views:
+  - title: 温度曲线
+    path: temperature
+    icon: mdi:radiator
+    badges: []
+    cards:
+      - type: markdown
+        content: |
+          ## 博威壁挂炉 · 采暖温度上升曲线
+          **温度（℃）是热舒适度指标，不属于能源消耗，故单独成板，不放入能源看板。**
+          采暖实际用气请在能源看板查看「贵阳燃气」的 `燃气表读数 / 当期用气量`（设备类 gas，已合规）。
+      - type: history-graph
+        title: 实时升温曲线（最近 24 小时，叠加燃烧动作）
+        hours_to_show: 24
+        refresh_interval: 0
+        entities:
+          - entity: sensor.bo_wei_bi_gua_lu_gong_nuan_shi_ji_wen_du
+            name: 供暖实际温度
+          - entity: sensor.bo_wei_bi_gua_lu_wei_yu_shi_ji_shui_wen
+            name: 卫浴实际水温
+          - entity: climate.bo_wei_bi_gua_lu_gong_nuan
+            attribute: hvac_action
+            name: 燃烧动作
+      - type: statistics-graph
+        title: 供暖实际温度 · 长期统计（均值/最小/最大，按日）
+        period: day
+        days_to_show: 30
+        stat_types:
+          - mean
+          - min
+          - max
+        entities:
+          - sensor.bo_wei_bi_gua_lu_gong_nuan_shi_ji_wen_du
+          - sensor.bo_wei_bi_gua_lu_wei_yu_shi_ji_shui_wen
+      - type: history-graph
+        title: 近 7 天采暖会话（捕捉多次升温）
+        hours_to_show: 168
+        refresh_interval: 0
+        entities:
+          - entity: sensor.bo_wei_bi_gua_lu_gong_nuan_shi_ji_wen_du
+            name: 供暖实际温度
+          - entity: climate.bo_wei_bi_gua_lu_gong_nuan
+            attribute: hvac_action
+            name: 燃烧动作
+      - type: entities
+        title: 当前状态
+        show_header_toggle: false
+        entities:
+          - entity: climate.bo_wei_bi_gua_lu_gong_nuan
+          - entity: sensor.bo_wei_bi_gua_lu_gong_nuan_shi_ji_wen_du
+          - entity: sensor.bo_wei_bi_gua_lu_ran_shao_zhuang_tai
+          - entity: sensor.bo_wei_bi_gua_lu_san_re_fang_shi
+          - entity: sensor.bo_wei_bi_gua_lu_ling_leng_shui_mo_shi
+          - entity: sensor.bo_wei_bi_gua_lu_gu_zhang_dai_ma

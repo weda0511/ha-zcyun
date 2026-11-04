@@ -1,0 +1,20 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "智城云（新云合）",
+        "description": "配置博威壁挂炉（智城云平台）账号",
+        "data": {
+          "account": "账号（手机号/用户名）",
+          "password": "密码",
+          "platformId": "平台ID（默认2）"
+        }
+      }
+    },
+    "error": {
+      "auth_failed": "鉴权失败：账号或密码错误",
+      "cannot_connect": "连接失败",
+      "no_devices": "账号下没有设备"
+    }
+  }
+}

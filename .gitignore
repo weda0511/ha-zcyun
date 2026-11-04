@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# 凭证与本地配置（含密码/openKey，严禁入库）
+zcyun_config.json
+auth_result.json
+*.cfg
+
+# 大型/二进制/设备私有产物
+*.html
+*.har
+apk/
+*.apk
+device_desc.json
+
+# 系统
+.workbuddy/
+.DS_Store
+*.log
