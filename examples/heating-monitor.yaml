@@ -28,12 +28,13 @@ views:
           | 🔁 零冷水 | 零冷水模式 | `aid 29`=0 | ○ 灰 |
           | ⚠️ 叹号 | 故障报警 | `aid 17`=无 | ○ 灰 |
 
-          > 注：房子图标来自 `aid 116`（地暖指示），火焰/风扇/水泵/温度计来自 `aid 107` 状态位图。
-          > 二进制状态实体（风扇/水泵/温度计/水流）需重启 HA 集成后才会显示，重载前为「不可用」属正常。
+          > 注：房子图标来自 `aid 116`（地暖指示）；火焰/风扇/水泵/温度计/水流来自 `aid 107` 状态位图；
+          > 雪花(夏季 aid102)/时钟(定时 aid108)/零冷水(aid29)/叹号(故障 aid17) 为单一开关量，均已接入为二进制传感器。
+          > 全部二进制状态实体（共 8 个）需**重新加载博威壁挂炉集成（或重启 HA）**后才生成，重载前显示「不可用」属正常。
       - type: glance
-        title: 锅炉实时运行状态（对应 App 图标，冬季烧地暖时点亮）
+        title: 锅炉实时运行状态（对应 App 图标，亮=激活）
         show_state: true
-        columns: 6
+        columns: 5
         entities:
           - entity: sensor.bo_wei_bi_gua_lu_san_re_fang_shi
             name: 🏠 地暖(房子)
@@ -53,6 +54,18 @@ views:
           - entity: binary_sensor.bo_wei_bi_gua_lu_shui_liu_xin_hao
             name: 💦 水流
             icon: mdi:waves
+          - entity: binary_sensor.bo_wei_bi_gua_lu_xia_ji_mo_shi
+            name: ❄️ 夏季模式
+            icon: mdi:snowflake
+          - entity: binary_sensor.bo_wei_bi_gua_lu_ding_shi_gong_neng
+            name: ⏰ 定时
+            icon: mdi:clock
+          - entity: binary_sensor.bo_wei_bi_gua_lu_ling_leng_shui
+            name: 🔁 零冷水
+            icon: mdi:repeat
+          - entity: binary_sensor.bo_wei_bi_gua_lu_gu_zhang_bao_jing
+            name: ⚠️ 故障
+            icon: mdi:alert
       - type: history-graph
         title: 实时升温曲线（最近 24 小时，叠加燃烧动作）
         hours_to_show: 24
