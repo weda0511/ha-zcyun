@@ -90,10 +90,11 @@ async def async_setup_entry(hass, entry, async_add_entities: AddEntitiesCallback
                 SensorEntityDescription(
                     key="radiator",
                     name="散热方式",
-                    icon="mdi:radiator",
+                    icon="mdi:home",
                 ),
                 AID_RADIATOR,
                 value_map=RADIATOR_MAP,
+                icon_map={"地暖": "mdi:home", "散热器": "mdi:radiator"},
             ),
             ZcyunAidSensor(
                 data,
@@ -113,18 +114,26 @@ class ZcyunAidSensor(ZcyunEntity, SensorEntity):
     """按 aid 读值的通用传感器"""
 
     def __init__(self, entry_data, description: SensorEntityDescription, aid,
-                 numeric=False, value_map=None, bitmask=None):
+                 numeric=False, value_map=None, bitmask=None, icon_map=None):
         super().__init__(entry_data["coordinator"], entry_data)
         self.entity_description = description
         self._aid = aid
         self._numeric = numeric
         self._value_map = value_map
         self._bitmask = bitmask
+        self._icon_map = icon_map
         self._attr_unique_id = f"{self._did}_{description.key}"
 
     @property
     def name(self):
         return f"{self._name} {self.entity_description.name}"
+
+    @property
+    def icon(self):
+        # 图标随状态切换（如散热方式：地暖=房子 / 散热器=暖气片）
+        if self._icon_map is not None and self.native_value in self._icon_map:
+            return self._icon_map[self.native_value]
+        return self.entity_description.icon
 
     @property
     def native_value(self):

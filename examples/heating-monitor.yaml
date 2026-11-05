@@ -37,8 +37,7 @@ views:
         columns: 5
         entities:
           - entity: sensor.bo_wei_bi_gua_lu_san_re_fang_shi
-            name: 🏠 地暖(房子)
-            icon: mdi:home
+            name: 散热方式
           - entity: sensor.bo_wei_bi_gua_lu_ran_shao_zhuang_tai
             name: 🔥 火焰/燃烧
             icon: mdi:fire
